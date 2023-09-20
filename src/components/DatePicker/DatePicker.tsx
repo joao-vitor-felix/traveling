@@ -16,7 +16,7 @@ interface InputProps extends ReactDatePickerProps {
 
 function DatePicker({ className, error, errorMessage, ...props }: InputProps) {
   const datePickerClassName = twMerge(
-    "rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-primaryLighter placeholder-black placeholder-opacity-20 outline-none transition-all focus:ring-1 focus:ring-primary",
+    "w-full rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-primary placeholder:text-gray-500 placeholder-opacity-20 outline-none transition-all focus:ring-1 focus:ring-primary",
     error ? "border-red-500" : "",
     className
   );
@@ -25,7 +25,6 @@ function DatePicker({ className, error, errorMessage, ...props }: InputProps) {
     <div className="flex w-full flex-col">
       <_DatePicker
         locale="pt-BR"
-        wrapperClassName="w-full"
         className={datePickerClassName}
         enableTabLoop={false}
         {...props}
