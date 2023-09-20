@@ -1,3 +1,9 @@
+import TripSearch from "./components/TripSearch";
+
 export default function Home() {
-  return <div>Boilerplate</div>;
+  return (
+    <>
+      <TripSearch />
+    </>
+  );
 }
