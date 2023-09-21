@@ -18,7 +18,9 @@ const TripSearch = () => {
           <CurrencyInput placeholder="Orçamento desejado" />
         </div>
       </div>
-      <Button className="mt-5">Buscar</Button>
+      <Button className="mt-5 shadow-md transition ease-linear duration-150 active:translate-y-2">
+        Buscar
+      </Button>
     </div>
   );
 };
