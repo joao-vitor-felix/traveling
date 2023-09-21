@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import TripSearch from "./components/TripSearch";
 import QuickSearch from "./components/QuickSearch/QuickSearch";
+import RecommendedTrips from "./components/RecommendedTrips";
 
 export const metadata: Metadata = {
   title: "Início | Traveling",
@@ -12,6 +13,7 @@ export default function Home() {
     <div>
       <TripSearch />
       <QuickSearch />
+      <RecommendedTrips />
     </div>
   );
 }
