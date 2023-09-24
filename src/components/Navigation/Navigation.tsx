@@ -41,11 +41,9 @@ const Navigation = () => {
 
     addEventListener("mousedown", handleClickOutside);
     addEventListener("keydown", handleEscape);
-    console.log("add");
     return () => {
       removeEventListener("keydown", handleEscape);
       removeEventListener("mousedown", handleClickOutside);
-      console.log("remove");
     };
   }, [isMenuOpen]);
 

@@ -1,8 +1,8 @@
 import { NextAuthProvider } from "@/providers/auth";
-import "./globals.css";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Navigation from "@/components/Navigation/Navigation";
+import "./globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
