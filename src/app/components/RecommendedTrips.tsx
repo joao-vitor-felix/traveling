@@ -12,7 +12,7 @@ const RecommendedTrips = async () => {
   const data = await fetchTrips();
 
   return (
-    <div className="container mx-auto p-5">
+    <section className="container mx-auto p-5">
       <div className="flex items-center">
         <div className="w-full h-[1px] bg-primary"></div>
         <h2 className="px-4 text-base font-medium text-primary whitespace-nowrap">
@@ -26,7 +26,7 @@ const RecommendedTrips = async () => {
           <TripItem key={trip.id} trip={trip} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
