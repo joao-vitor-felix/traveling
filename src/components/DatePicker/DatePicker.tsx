@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 import _DatePicker, {
   ReactDatePickerProps,
@@ -27,6 +26,7 @@ function DatePicker({ className, error, errorMessage, ...props }: InputProps) {
         locale="pt-BR"
         className={datePickerClassName}
         enableTabLoop={false}
+        dateFormat="dd/MM/yyyy"
         {...props}
       />
       {error && errorMessage && (
@@ -36,4 +36,4 @@ function DatePicker({ className, error, errorMessage, ...props }: InputProps) {
   );
 }
 
-export default forwardRef(DatePicker);
+export default DatePicker;
