@@ -42,7 +42,7 @@ const TripDetails: FC<{ params: { tripId: string } }> = async ({ params }) => {
   if (!trip) return null;
 
   return (
-    <div className="container mx-auto">
+    <main className="container mx-auto">
       <TripHeader trip={trip} />
       <TripReservation trip={trip} />
       <TripDescription description={trip.description} />
@@ -53,7 +53,7 @@ const TripDetails: FC<{ params: { tripId: string } }> = async ({ params }) => {
         latitude={trip.latitude}
         longitude={trip.longitude}
       />
-    </div>
+    </main>
   );
 };
 
