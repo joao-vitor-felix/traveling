@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div>
+    <main>
       <TripSearch />
       <QuickSearch />
       <RecommendedTrips />
-    </div>
+    </main>
   );
 }
