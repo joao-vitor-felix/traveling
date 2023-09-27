@@ -116,6 +116,7 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
         error={!!errors.guests}
         errorMessage={errors.guests?.message}
         placeholder={`Número de hóspedes (max: ${trip.maxGuests})`}
+        type="number"
       />
       <div className="flex justify-between mt-3">
         <span className="font-medium text-sm text-gray-900">Total:</span>
