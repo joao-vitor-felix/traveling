@@ -23,11 +23,9 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/");
+      return router.push("/");
     }
-  }, [status, router]);
 
-  useEffect(() => {
     const fetchTrip = async () => {
       const response = await fetch(`/api/trips/check`, {
         method: "POST",
@@ -48,17 +46,13 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
     };
 
     fetchTrip();
-  }, [params.tripId, searchParams, router]);
+  }, [params.tripId, searchParams, router, status]);
 
   if (!trip) return null;
 
   const startDate = new Date(searchParams.get("startDate") as string);
   const endDate = new Date(searchParams.get("endDate") as string);
   const guests = Number(searchParams.get("guests"));
-
-  console.log(typeof startDate);
-  console.log(typeof endDate);
-  console.log(typeof guests);
 
   const handleConfirmTrip = async () => {
     const req = await fetch("/api/trips/reservation", {
