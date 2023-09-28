@@ -2,11 +2,12 @@
 
 import { FC } from "react";
 import { Trip } from "@prisma/client";
+import { useRouter } from "next/navigation";
+import { Controller, useForm } from "react-hook-form";
+import { add, addDays, differenceInDays } from "date-fns";
 import Button from "@/components/Button/Button";
 import DatePicker from "@/components/DatePicker/DatePicker";
 import Input from "@/components/Input/Input";
-import { Controller, useForm } from "react-hook-form";
-import { addDays, differenceInDays } from "date-fns";
 
 type FormData = {
   guests: string;
@@ -26,6 +27,8 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
 
   const startDate = watch("startDate");
   const endDate = watch("endDate");
+
+  const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
     const response = await fetch("/api/trips/check", {
@@ -61,7 +64,18 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
         message: res.error.message
       });
     }
+
+    router.push(
+      `/trips/${
+        trip.id
+      }/confirmation?startDate=${data.startDate?.toISOString()}&endDate=${data.endDate?.toISOString()}&guests=${
+        data.guests
+      }`
+    );
   };
+
+  const correctStartDate = add(trip.startDate, { hours: 3 });
+  const correctEndDate = add(trip.endDate, { hours: 3 });
 
   return (
     <div className="flex flex-col px-5 py-1 gap-3">
@@ -80,8 +94,8 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
               selected={field.value}
               placeholderText="Data de Início"
               className="w-full"
-              minDate={trip.startDate}
-              maxDate={trip.endDate}
+              minDate={correctStartDate}
+              maxDate={(endDate && addDays(endDate, -1)) ?? correctEndDate}
             />
           )}
         />
@@ -99,8 +113,8 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
               selected={field.value}
               placeholderText="Data de Final"
               className="w-full"
-              minDate={addDays(startDate, 1) ?? trip.startDate}
-              maxDate={trip.endDate}
+              minDate={(startDate && addDays(startDate, 1)) ?? correctStartDate}
+              maxDate={correctEndDate}
             />
           )}
         />
