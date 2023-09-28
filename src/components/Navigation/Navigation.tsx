@@ -81,17 +81,22 @@ const Navigation = () => {
           </div>
 
           {isMenuOpen && (
-            <div
-              className="absolute top-14 left-0 w-full h-full bg-white rounded-lg shadow-md flex flex-col justify-center items-center"
+            <nav
+              className="absolute top-14 left-0 w-full h-[100px] bg-white rounded-lg shadow-md flex flex-col justify-center items-center  text-gray-900 text-sm font-semibold text-center"
               ref={divRef}
             >
-              <button
-                className="text-gray-900 text-sm font-semibold"
-                onClick={handleLogoutClick}
+              <Link
+                className="pb-2 border-b border-primary border-solid"
+                href="/my-trips"
+                onClick={() => setIsMenuOpen(false)}
               >
+                Minhas viagens
+              </Link>
+
+              <button className="pt-2" onClick={handleLogoutClick}>
                 Logout
               </button>
-            </div>
+            </nav>
           )}
         </div>
       )}
