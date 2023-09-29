@@ -11,10 +11,30 @@ const QuickSearch = () => {
         <div className="w-full h-[1px] bg-primary"></div>
       </div>
       <div className="mt-4 flex items-center justify-between gap-3 px-6">
-        <Icon path="/cottage-icon.png" name="Chalé" alt="Pesquisar Chalés" />
-        <Icon path="/farm-icon.png" name="Fazenda" alt="Pesquisar Fazendas" />
-        <Icon path="/hotel-icon.png" name="Hotel" alt="Pesquisar Hotéis" />
-        <Icon path="/inn-icon.png" name="Pousada" alt="Pesquisar Pousadas" />
+        <Icon
+          href="/trips/search?text=Chalé"
+          path="/cottage-icon.png"
+          name="Chalé"
+          alt="Pesquisar Chalés"
+        />
+        <Icon
+          href="/trips/search?text=Fazenda"
+          path="/farm-icon.png"
+          name="Fazenda"
+          alt="Pesquisar Fazendas"
+        />
+        <Icon
+          href="/trips/search?text=Hotel"
+          path="/hotel-icon.png"
+          name="Hotel"
+          alt="Pesquisar Hotéis"
+        />
+        <Icon
+          href="/trips/search?text=Pousada"
+          path="/inn-icon.png"
+          name="Pousada"
+          alt="Pesquisar Pousadas"
+        />
       </div>
     </div>
   );
