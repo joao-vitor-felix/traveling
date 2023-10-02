@@ -29,7 +29,7 @@ const SearchTripList = () => {
   }, [searchParams]);
 
   return (
-    <div className="container mx-auto flex flex-col items-center p-5 gap-2">
+    <main className="container mx-auto flex flex-col items-center p-5 gap-2">
       <h1 className="text-primary font-semibold text-xl">
         Viagens Encontradas
       </h1>
@@ -42,7 +42,7 @@ const SearchTripList = () => {
       <div className="flex flex-col gap-4">
         {trips?.map(trip => <TripItem key={trip.id} trip={trip} />)}
       </div>
-    </div>
+    </main>
   );
 };
 

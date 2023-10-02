@@ -38,7 +38,7 @@ const TripList = () => {
   }, [status, fetchReservations, router]);
 
   return (
-    <div className="container mx-auto p-5">
+    <main className="container mx-auto p-5">
       <h1 className="font-semibold text-primary text-xl">Minhas Viagens</h1>
       {reservations.length > 0 ? (
         reservations?.map(reservation => (
@@ -59,7 +59,7 @@ const TripList = () => {
           </Link>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 
