@@ -80,7 +80,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   };
 
   return (
-    <div className="container mx-auto p-5">
+    <main className="container mx-auto p-5">
       <h1 className="font-semibold text-xl text-primary">Sua viagem</h1>
 
       <div className="flex flex-col p-5 mt-5 border-primary border-solid border shadow-lg rounded-lg">
@@ -133,7 +133,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
           Finalizar Compra
         </Button>
       </div>
-    </div>
+    </main>
   );
 };
 
