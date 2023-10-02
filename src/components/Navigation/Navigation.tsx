@@ -82,7 +82,7 @@ const Navigation = () => {
 
           {isMenuOpen && (
             <nav
-              className="absolute top-14 left-0 w-full h-[100px] bg-white rounded-lg shadow-md flex flex-col justify-center items-center  text-gray-900 text-sm font-semibold text-center"
+              className="absolute top-14 left-0 w-full h-[100px] bg-white rounded-lg shadow-md flex flex-col justify-center items-center  text-gray-900 text-sm font-semibold text-center z-50"
               ref={divRef}
             >
               <Link
