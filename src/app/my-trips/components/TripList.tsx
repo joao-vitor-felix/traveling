@@ -19,16 +19,14 @@ const TripList = () => {
 
   const router = useRouter();
 
-  const fetchReservations = useCallback(() => {
-    async () => {
-      const response = await fetch(
-        `/api/user/${(data?.user as { id: string }).id}/reservations`
-      );
+  const fetchReservations = useCallback(async () => {
+    const response = await fetch(
+      `/api/user/${(data?.user as { id: string }).id}/reservations`
+    );
 
-      const json = await response.json();
+    const json = await response.json();
 
-      setReservations(json);
-    };
+    setReservations(json);
   }, [data]);
 
   useEffect(() => {
