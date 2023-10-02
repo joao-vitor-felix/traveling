@@ -9,7 +9,8 @@ import ReactCountryFlag from "react-country-flag";
 import ptBR from "date-fns/locale/pt-BR";
 import Button from "@/components/Button/Button";
 import { useSession } from "next-auth/react";
-import { toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
+import Link from "next/link";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
@@ -17,7 +18,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
 
   const searchParams = useSearchParams();
 
-  const { status, data } = useSession();
+  const { status } = useSession();
 
   const router = useRouter();
 
@@ -55,32 +56,27 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const guests = Number(searchParams.get("guests"));
 
   const handleConfirmTrip = async () => {
-    const req = await fetch("/api/trips/reservation", {
+    const req = await fetch("/api/payment", {
+      method: "POST",
       body: JSON.stringify({
         tripId: params.tripId,
-        userId: (data?.user as { id: string }).id,
+        name: trip.name,
+        description: trip.description,
+        coverImage: trip.coverImage,
         startDate,
         endDate,
         guests,
-        totalPaid: totalPrice
-      }),
-      method: "POST"
+        totalPrice
+      })
     });
 
-    if (!req.ok) {
-      return toast.error("Ocorreu um erro ao realizar a reserva!", {
-        position: "bottom-center"
-      });
-    }
+    const res = await req.json();
 
-    toast.success("Viagem confirmada com sucesso!", {
-      position: "bottom-center",
-      autoClose: 3000
-    });
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_KEY as string
+    );
 
-    setTimeout(() => {
-      router.push("/my-trips");
-    }, 3500);
+    await stripe?.redirectToCheckout({ sessionId: res.sessionId });
   };
 
   return (
@@ -89,14 +85,17 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
 
       <div className="flex flex-col p-5 mt-5 border-primary border-solid border shadow-lg rounded-lg">
         <div className="flex items-center gap-3 pb-5 border-b border-primary border-solid">
-          <div className="relative h-[106px] w-[124px]">
+          <Link
+            href={`/trips/${trip.id}`}
+            className="relative h-[106px] w-[124px]"
+          >
             <Image
               src={trip.coverImage}
               fill
               className="rounded-lg object-cover"
               alt={trip.name}
             />
-          </div>
+          </Link>
 
           <div className="flex flex-col">
             <h2 className="text-xl text-primary font-semibold">{trip.name}</h2>
