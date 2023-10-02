@@ -1,11 +1,12 @@
 import { NextAuthProvider } from "@/providers/auth";
 import { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import Navigation from "@/components/Navigation/Navigation";
+import { PropsWithChildren } from "react";
 import "./globals.css";
-import Footer from "@/components/Footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navigation from "@/components/Navigation/Navigation";
+import Footer from "@/components/Footer/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,17 +15,13 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Traveling",
-  description: "Seu sonho também é nosso!"
+  description: "O seu sonho também é o nosso sonho!"
 };
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>
+    <html lang="pt-BR">
+      <body className={`flex flex-col min-h-screen ${poppins.className}`}>
         <NextAuthProvider>
           <Navigation />
           <ToastContainer />
