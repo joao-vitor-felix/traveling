@@ -11,16 +11,16 @@ function Input(
   ref: LegacyRef<HTMLInputElement> | undefined
 ) {
   const inputClassName = twMerge(
-    "rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-primary placeholder:text-gray-500 placeholder-opacity-20 outline-none transition-all",
+    "w-full rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-primary placeholder:text-gray-500 placeholder-opacity-20 outline-none transition-all",
     error ? "border-red-500" : "focus:ring-1 focus:ring-primary",
     className
   );
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex flex-col w-full">
       <input ref={ref} className={inputClassName} {...props} />
       {error && errorMessage && (
-        <span className="mt-1 text-xs text-red-400">{errorMessage}</span>
+        <span className="mt-1 text-xs text-red-500">{errorMessage}</span>
       )}
     </div>
   );

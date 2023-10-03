@@ -21,7 +21,7 @@ function DatePicker({ className, error, errorMessage, ...props }: InputProps) {
   );
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex flex-col w-1/2">
       <_DatePicker
         locale="pt-BR"
         className={datePickerClassName}
