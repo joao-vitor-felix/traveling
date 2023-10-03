@@ -31,12 +31,15 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
   const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
+    const correctStartDate = add(data.startDate, { hours: -3 });
+    const correctEndDate = add(data.endDate, { hours: -3 });
+
     const response = await fetch("/api/trips/check", {
       method: "POST",
       body: JSON.stringify({
         tripId: trip.id,
-        startDate: data.startDate,
-        endDate: data.endDate,
+        startDate: correctStartDate,
+        endDate: correctEndDate,
         guests: data.guests
       })
     });
@@ -68,7 +71,7 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
     router.push(
       `/trips/${
         trip.id
-      }/confirmation?startDate=${data.startDate?.toISOString()}&endDate=${data.endDate?.toISOString()}&guests=${
+      }/confirmation?startDate=${correctStartDate.toISOString()}&endDate=${correctEndDate.toISOString()}&guests=${
         data.guests
       }`
     );
