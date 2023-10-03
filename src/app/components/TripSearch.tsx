@@ -78,7 +78,7 @@ const TripSearch = () => {
       </div>
       <Button
         onClick={handleSubmit(onSubmit)}
-        className="mt-5 shadow-md transition ease-linear duration-150 active:translate-y-2"
+        className="mt-5 shadow-md transition ease-linear duration-150"
       >
         Buscar
       </Button>
