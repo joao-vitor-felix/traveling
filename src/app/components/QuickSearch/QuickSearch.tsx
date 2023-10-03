@@ -10,7 +10,7 @@ const QuickSearch = () => {
         </span>
         <div className="w-full h-[1px] bg-primary"></div>
       </div>
-      <div className="mt-4 flex items-center justify-between gap-3 px-6">
+      <div className="mt-4 flex items-center justify-between gap-3 px-6 lg:justify-center lg:gap-40 lg:mt-10">
         <Icon
           href="/trips/search?text=Chalé"
           path="/cottage-icon.png"

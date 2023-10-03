@@ -13,7 +13,7 @@ const Icon: FC<IconProps> = ({ path, name, alt, href }) => {
   return (
     <Link href={href} className="flex flex-col items-center gap-2">
       <Image src={path} width={40} height={40} alt={alt} />
-      <span className="text-primary">{name}</span>
+      <span className="text-primary lg:text-base">{name}</span>
     </Link>
   );
 };
