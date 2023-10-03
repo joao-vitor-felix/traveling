@@ -41,21 +41,23 @@ const TripList = () => {
     <main className="container mx-auto p-5">
       <h1 className="font-semibold text-primary text-xl">Minhas Viagens</h1>
       {reservations.length > 0 ? (
-        reservations?.map(reservation => (
-          <ReservationItem
-            fetchReservations={fetchReservations}
-            key={reservation.id}
-            reservation={reservation}
-          />
-        ))
+        <div className="flex flex-col lg:flex-row lg:gap-8">
+          {reservations?.map(reservation => (
+            <ReservationItem
+              fetchReservations={fetchReservations}
+              key={reservation.id}
+              reservation={reservation}
+            />
+          ))}
+        </div>
       ) : (
-        <div className="flex flex-col">
+        <div className="flex flex-col lg:max-w-[500px]">
           <p className="mt-2 font-medium text-gray-900">
             Você ainda não possui reservas! =(
           </p>
 
           <Link href="/">
-            <Button className="w-full mt-2">Fazer reserva</Button>
+            <Button className="w-full mt-2 lg:mt-5">Fazer reserva</Button>
           </Link>
         </div>
       )}
