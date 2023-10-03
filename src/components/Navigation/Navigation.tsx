@@ -48,7 +48,7 @@ const Navigation = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
+    <header className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center lg:border-b lg:border-primaryLighter">
       <Link href="/" className="flex items-center gap-1">
         <BiSolidPlaneTakeOff size={28} />
         <h1 className="text-gray-900 text-xl">Traveling</h1>
