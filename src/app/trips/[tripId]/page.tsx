@@ -42,11 +42,17 @@ const TripDetails: FC<{ params: { tripId: string } }> = async ({ params }) => {
   if (!trip) return null;
 
   return (
-    <main className="container mx-auto">
+    <main className="container mx-auto lg:px-40 lg:pt-10">
       <TripHeader trip={trip} />
-      <TripReservation trip={trip} />
-      <TripDescription description={trip.description} />
-      <TripHighlights highlights={trip.highlights} />
+      <div className="flex flex-col lg:flex-row lg:mt-12 lg:gap-10">
+        <div className="lg:order-2 lg:w-full">
+          <TripReservation trip={trip} />
+        </div>
+        <div className="lg:order-1">
+          <TripDescription description={trip.description} />
+          <TripHighlights highlights={trip.highlights} />
+        </div>
+      </div>
       <TripLocation
         locationDescription={trip.locationDescription}
         location={trip.location}

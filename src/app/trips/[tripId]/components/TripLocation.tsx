@@ -35,8 +35,10 @@ const TripLocation = ({
   };
 
   return (
-    <div className="p-5">
-      <h2 className="font-semibold text-lg text-primary mb-5">Localização</h2>
+    <div className="p-5 lg:p-0 lg:mt-12 lg:pb-20">
+      <h2 className="font-semibold text-lg text-primary mb-5 lg:text-xl">
+        Localização
+      </h2>
       <div className="relative h-[280px] w-full">
         <GoogleMap
           zoom={10}
@@ -47,8 +49,10 @@ const TripLocation = ({
         </GoogleMap>
       </div>
 
-      <h3 className="text-primary text-base font-semibold mt-5">{location}</h3>
-      <p className="text-sm leading-6 text-gray-900 mt-3">
+      <h3 className="text-primary text-base font-semibold mt-5 lg:text-xl">
+        {location}
+      </h3>
+      <p className="text-sm leading-6 text-gray-900 mt-3 lg:text-base">
         {locationDescription}
       </p>
       <Button

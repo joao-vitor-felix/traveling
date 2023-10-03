@@ -81,7 +81,13 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
   const correctEndDate = add(trip.endDate, { hours: 3 });
 
   return (
-    <div className="flex flex-col px-5 py-1 gap-3">
+    <div className="flex flex-col px-5 py-1 gap-3 lg:min-w-[380px] lg:p-5 lg:border-primaryLighter lg:border lg:rounded-lg lg:shadow-lg">
+      <p className="text-xl hidden text-gray-900 mb-4 lg:block">
+        <span className="font-semibold text-primary">
+          R${trip.pricePerDay.toString()}
+        </span>{" "}
+        por dia
+      </p>
       <div className="flex gap-3">
         <Controller
           name="startDate"
@@ -145,7 +151,7 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
             : "R$ 0,00"}
         </span>
       </div>
-      <div className="pb-5 border-b border-b-primary w-full">
+      <div className="pb-5 border-b border-b-primary w-full lg:border-none lg:pb-0">
         <Button className="mt-3 w-full" onClick={handleSubmit(onSubmit)}>
           Reservar agora
         </Button>
