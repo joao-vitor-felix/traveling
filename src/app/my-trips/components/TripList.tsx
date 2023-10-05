@@ -7,6 +7,7 @@ import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import ReservationItem from "./ReservationItem";
+import SkeletonCard from "@/components/SkeletonCard/SkeletonCard";
 
 const TripList = () => {
   const [reservations, setReservations] = useState<
@@ -14,6 +15,8 @@ const TripList = () => {
       include: { trip: true };
     }>[]
   >([]);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const { status, data } = useSession();
 
@@ -25,7 +28,7 @@ const TripList = () => {
     );
 
     const json = await response.json();
-
+    setIsLoading(false);
     setReservations(json);
   }, [data]);
 
@@ -40,7 +43,11 @@ const TripList = () => {
   return (
     <main className="container mx-auto p-5">
       <h1 className="font-semibold text-primary text-xl">Minhas Viagens</h1>
-      {reservations.length > 0 ? (
+      {isLoading ? (
+        <div className="flex flex-col items-center p-5 mt-5 gap-2 w-full lg:flex-row lg:flex-wrap lg:gap-8">
+          <SkeletonCard trips={10} width={340} height={460} />
+        </div>
+      ) : reservations.length > 0 ? (
         <div className="flex flex-col lg:flex-row lg:gap-8">
           {reservations?.map(reservation => (
             <ReservationItem
