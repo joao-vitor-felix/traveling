@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Trip } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import { add, addDays, differenceInDays } from "date-fns";
 import Button from "@/components/Button/Button";
 import DatePicker from "@/components/DatePicker/DatePicker";
 import Input from "@/components/Input/Input";
+import { BeatLoader } from "react-spinners";
 
 type FormData = {
   guests: string;
@@ -24,6 +25,7 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
     control,
     setError
   } = useForm<FormData>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const startDate = watch("startDate");
   const endDate = watch("endDate");
@@ -33,6 +35,8 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
   const onSubmit = async (data: FormData) => {
     const correctStartDate = add(data.startDate, { hours: -3 });
     const correctEndDate = add(data.endDate, { hours: -3 });
+
+    setIsLoading(true);
 
     const response = await fetch("/api/trips/check", {
       method: "POST",
@@ -75,6 +79,8 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
         data.guests
       }`
     );
+
+    setIsLoading(false);
   };
 
   const correctStartDate = add(trip.startDate, { hours: 3 });
@@ -152,7 +158,12 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
         </span>
       </div>
       <div className="pb-5 border-b border-b-primary w-full lg:border-none lg:pb-0">
-        <Button className="mt-3 w-full" onClick={handleSubmit(onSubmit)}>
+        <Button
+          className="mt-3 w-full"
+          onClick={handleSubmit(onSubmit)}
+          spinner={<BeatLoader size={15} color="#fff" />}
+          isLoading={isLoading}
+        >
           Reservar agora
         </Button>
       </div>

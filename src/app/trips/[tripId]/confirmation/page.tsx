@@ -11,10 +11,12 @@ import Button from "@/components/Button/Button";
 import { useSession } from "next-auth/react";
 import { loadStripe } from "@stripe/stripe-js";
 import Link from "next/link";
+import { BeatLoader } from "react-spinners";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchParams = useSearchParams();
 
@@ -56,6 +58,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const guests = Number(searchParams.get("guests"));
 
   const handleConfirmTrip = async () => {
+    setIsLoading(true);
     const req = await fetch("/api/payment", {
       method: "POST",
       body: JSON.stringify({
@@ -77,6 +80,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
     );
 
     await stripe?.redirectToCheckout({ sessionId: res.sessionId });
+    setIsLoading(false);
   };
 
   return (
@@ -129,7 +133,12 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
         </h3>
         <p className="text-gray-900">{guests} hóspedes</p>
 
-        <Button className="mt-5" onClick={handleConfirmTrip}>
+        <Button
+          className="mt-5"
+          onClick={handleConfirmTrip}
+          spinner={<BeatLoader size={15} color="#fff" />}
+          isLoading={isLoading}
+        >
           Finalizar Compra
         </Button>
       </div>
