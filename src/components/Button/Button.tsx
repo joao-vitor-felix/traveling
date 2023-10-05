@@ -3,9 +3,17 @@ import { twMerge } from "tailwind-merge";
 
 interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   variant?: "primary" | "outlined" | "danger";
+  isLoading?: boolean;
+  spinner?: React.ReactNode;
 }
 
-function Button({ className, variant = "primary", ...props }: ButtonProps) {
+function Button({
+  className,
+  variant = "primary",
+  isLoading = false,
+  spinner,
+  ...props
+}: ButtonProps) {
   const variantClasses = {
     primary: "bg-gray-900 text-white hover:bg-gray-700",
     outlined: "bg-transparent border-2 border-primary text-gray-900",
@@ -21,7 +29,7 @@ function Button({ className, variant = "primary", ...props }: ButtonProps) {
 
   return (
     <button className={_className} {...props}>
-      {props.children}
+      {isLoading ? spinner : props.children}
     </button>
   );
 }
