@@ -3,8 +3,9 @@ import { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { PropsWithChildren } from "react";
 import "./globals.css";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-loading-skeleton/dist/skeleton.css";
+import { ToastContainer } from "react-toastify";
 import Navigation from "@/components/Navigation/Navigation";
 import Footer from "@/components/Footer/Footer";
 
