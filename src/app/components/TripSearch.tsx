@@ -5,6 +5,7 @@ import CurrencyInput from "@/components/CurrencyInput/CurrencyInput";
 import DatePicker from "@/components/DatePicker/DatePicker";
 import Input from "@/components/Input/Input";
 import { useRouter } from "next/navigation";
+import { useCallback, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripSearchForm {
@@ -20,16 +21,33 @@ const TripSearch = () => {
     control,
     formState: { errors },
     register,
+    getValues,
     handleSubmit
   } = useForm<TripSearchForm>();
 
-  const onSubmit = (data: TripSearchForm) => {
-    router.push(
-      `/trips/search?text=${
-        data.text
-      }&startDate=${data.startDate?.toISOString()}&budget=${data.budget}`
-    );
-  };
+  const onSubmit = useCallback(
+    (data: TripSearchForm) => {
+      router.push(
+        `/trips/search?text=${
+          data.text
+        }&startDate=${data.startDate?.toISOString()}&budget=${data.budget}`
+      );
+    },
+    [router]
+  );
+
+  useEffect(() => {
+    const handleEnter = (e: KeyboardEvent) => {
+      const isValid = getValues("text");
+      if (e.key === "Enter" && isValid) {
+        handleSubmit(onSubmit)();
+      }
+    };
+
+    addEventListener("keypress", handleEnter);
+
+    return () => removeEventListener("keypress", handleEnter);
+  }, [handleSubmit, getValues, onSubmit]);
 
   return (
     <div className="container mx-auto p-5 bg-search-background bg-cover bg-center bg-no-repeat lg:py-28">
