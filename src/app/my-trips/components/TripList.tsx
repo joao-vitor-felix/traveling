@@ -23,13 +23,16 @@ const TripList = () => {
   const router = useRouter();
 
   const fetchReservations = useCallback(async () => {
-    const response = await fetch(
-      `/api/user/${(data?.user as { id: string }).id}/reservations`
-    );
+    try {
+      const response = await fetch(
+        `/api/user/${(data?.user as { id: string })?.id}/reservations`
+      );
 
-    const json = await response.json();
-    setIsLoading(false);
-    setReservations(json);
+      const json = await response.json();
+      setReservations(json);
+    } finally {
+      setIsLoading(false);
+    }
   }, [data]);
 
   useEffect(() => {
@@ -58,15 +61,17 @@ const TripList = () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col lg:max-w-[500px]">
-          <p className="mt-2 font-medium text-gray-900">
-            Você ainda não possui reservas! =(
-          </p>
+        reservations.length < 0 && (
+          <div className="flex flex-col lg:max-w-[500px]">
+            <p className="mt-2 font-medium text-gray-900">
+              Você ainda não possui reservas! =(
+            </p>
 
-          <Link href="/">
-            <Button className="w-full mt-2 lg:mt-5">Fazer reserva</Button>
-          </Link>
-        </div>
+            <Link href="/">
+              <Button className="w-full mt-2 lg:mt-5">Fazer reserva</Button>
+            </Link>
+          </div>
+        )
       )}
     </main>
   );
