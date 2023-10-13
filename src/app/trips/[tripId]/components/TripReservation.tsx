@@ -107,7 +107,7 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
               errorMessage={errors?.startDate?.message}
               onChange={field.onChange}
               selected={field.value}
-              placeholderText="Data de Início"
+              placeholderText="Data inicial"
               className="w-full"
               minDate={correctStartDate}
               maxDate={(endDate && addDays(endDate, -1)) ?? correctEndDate}
@@ -126,7 +126,7 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
               errorMessage={errors?.endDate?.message}
               onChange={field.onChange}
               selected={field.value}
-              placeholderText="Data de Final"
+              placeholderText="Data final"
               className="w-full"
               minDate={(startDate && addDays(startDate, 1)) ?? correctStartDate}
               maxDate={correctEndDate}
@@ -146,6 +146,7 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
         errorMessage={errors.guests?.message}
         placeholder={`Número de hóspedes (max: ${trip.maxGuests})`}
         type="number"
+        aria-label={`Quantidade de hóspedes da viagem ${trip.name}`}
       />
       <div className="flex justify-between mt-3">
         <span className="font-medium text-sm text-gray-900">Total:</span>
@@ -163,6 +164,7 @@ const TripReservation: FC<{ trip: Trip }> = ({ trip }) => {
           onClick={handleSubmit(onSubmit)}
           spinner={<BeatLoader size={15} color="#fff" />}
           isLoading={isLoading}
+          aria-label={`Reservar viagem ${trip.name}`}
         >
           Reservar agora
         </Button>
