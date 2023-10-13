@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import TripSearch from "./components/TripSearch";
+import TripSearch from "./components/TripSearch/TripSearch";
 import QuickSearch from "./components/QuickSearch/QuickSearch";
 import RecommendedTrips from "./components/RecommendedTrips";
 
