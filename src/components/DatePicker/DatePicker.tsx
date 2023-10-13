@@ -30,7 +30,7 @@ function DatePicker({ className, error, errorMessage, ...props }: InputProps) {
         {...props}
       />
       {error && errorMessage && (
-        <div className="text-red-500 mt-1 text-xs">{errorMessage}</div>
+        <span className="text-red-500 mt-1 text-xs">{errorMessage}</span>
       )}
     </div>
   );
