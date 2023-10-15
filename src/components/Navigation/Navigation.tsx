@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiSolidPlaneTakeOff } from "react-icons/bi";
+import { ClipLoader } from "react-spinners";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,13 +64,17 @@ const Navigation = () => {
         </button>
       )}
 
+      {status === "loading" && (
+        <ClipLoader aria-label="Carregando..." size={24} />
+      )}
+
       {status === "authenticated" && data.user && (
         <div className="flex items-center gap-3 border-primaryLighter border border-solid rounded-full p-2 px-3 relative">
           <Image
             height={35}
             width={35}
             src={data.user.image!}
-            alt={data.user.name!}
+            alt={`Imagem do usuário ${data.user.name!}`}
             className="rounded-full shadow-md"
           />
           <div ref={divRef}>
@@ -77,6 +82,7 @@ const Navigation = () => {
               size={24}
               onClick={handleMenuClick}
               className="cursor-pointer"
+              aria-label="Abrir menu"
             />
           </div>
 
