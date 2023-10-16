@@ -23,9 +23,13 @@ const SearchTripList = () => {
         )}`
       );
 
+      if (!response.ok) {
+        return setIsLoading(false);
+      }
+
       const data = await response.json();
-      setIsLoading(false);
       setTrips(data);
+      setIsLoading(false);
     };
 
     fetchTrips();
