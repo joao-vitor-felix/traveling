@@ -11,17 +11,17 @@ const generateSearchQuery = (
     OR: [
       {
         name: {
-          search: text
+          search: text.split(" ").join(" <-> ")
         }
       },
       {
         description: {
-          search: text
+          search: text.split(" ").join(" <-> ")
         }
       },
       {
         location: {
-          search: text
+          search: text.split(" ").join(" <-> ")
         }
       }
     ],
@@ -55,7 +55,6 @@ const generateSearchQuery = (
       ]
     };
   }
-
   return searchQuery;
 };
 
@@ -78,6 +77,15 @@ export async function GET(request: Request) {
   const trips = await prisma.trip.findMany({
     where: generateSearchQuery(text, startDate, budget)
   });
+
+  if (trips.length === 0) {
+    return new NextResponse(
+      JSON.stringify({
+        message: "No trips found"
+      }),
+      { status: 404 }
+    );
+  }
 
   return new NextResponse(JSON.stringify(trips), { status: 200 });
 }
