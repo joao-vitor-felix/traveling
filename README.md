@@ -59,7 +59,7 @@ NEXT_PUBLIC_STRIPE_KEY = Key pública da API do Stripe
 STRIPE_WEBHOOK_SECRET_KEY = Key secreta do webhook do Stripe
 ```
 
-É necessário logar no stripe, rodar o script `stripe:listen` para obter a key e ouvir por eventos do stripe, e então está tudo pronto para realizar pagamentos.
+É necessário instalar o [Stripe CLI](https://stripe.com/docs/stripe-cli?locale=pt-BR), logar no Stripe, rodar o script `stripe:listen` para obter a key e ouvir por eventos do Stripe, e então está tudo pronto para realizar pagamentos.
 
 Para realizar um pagamento de teste no Stripe é necessário utilizar um cartão de crédito de teste. Você pode encontrar os cartões de teste [aqui](https://stripe.com/docs/testing#cards).
 
