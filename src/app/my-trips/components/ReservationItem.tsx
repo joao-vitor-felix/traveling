@@ -87,7 +87,7 @@ const ReservationItem = ({
         </h3>
 
         <div className="flex justify-between mt-1">
-          <p className="text-gray-900 text-sm mt-2">Total:</p>
+          <p className="text-gray-900 text-sm">Total:</p>
           <p className="text-gray-900 font-medium text-sm">
             R${Number(reservation.totalPaid)}
           </p>
