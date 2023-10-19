@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { loadStripe } from "@stripe/stripe-js";
 import Link from "next/link";
 import { BeatLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   const [trip, setTrip] = useState<Trip | null>();
@@ -26,6 +27,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
 
   useEffect(() => {
     if (status === "unauthenticated") {
+      toast.error("Você precisa estar logado para acessar esta página.");
       return router.push("/");
     }
 
