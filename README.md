@@ -13,13 +13,13 @@ Aplicação web que permite que o usuário realize reservas para viagens.
 ## 💡 Funcionalidades
 
 - Reserva de viagem;
-- Cancelamento de reserva agendada;
+- Cancelamento de reserva;
 - Pagamentos;
 - Autenticação com o Google.
 
 ## 🛠️ Stack utilizada
 
-Next.js, React, TypeScript, Prisma, PostgreSQL, Next Auth, Tailwind, React Hook Form, Stripe API, Google Maps API, Jest, React Testing Library, Sentry.
+Next.js, React, TypeScript, Prisma, PostgreSQL, Next Auth, Tailwind CSS, React Hook Form, Stripe API, Google Maps API, Jest, React Testing Library, Sentry.
 
 ## ⚙️ Variáveis de Ambiente
 
