@@ -5,7 +5,7 @@ import CurrencyInput from "@/components/CurrencyInput/CurrencyInput";
 import DatePicker from "@/components/DatePicker/DatePicker";
 import Input from "@/components/Input/Input";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripSearchForm {
@@ -36,18 +36,23 @@ const TripSearch = () => {
     [router]
   );
 
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+  const handleInputFocus = () => setIsInputFocused(true);
+  const handleInputBlur = () => setIsInputFocused(false);
+
   useEffect(() => {
-    const handleEnter = (e: KeyboardEvent) => {
-      const isValid = getValues("text");
-      if (e.key === "Enter" && isValid) {
+    const handleEnterPress = (event: KeyboardEvent) => {
+      const isValidValue = getValues("text");
+      if (event.key === "Enter" && isValidValue && isInputFocused) {
         handleSubmit(onSubmit)();
       }
     };
 
-    addEventListener("keypress", handleEnter);
+    addEventListener("keypress", handleEnterPress);
 
-    return () => removeEventListener("keypress", handleEnter);
-  }, [handleSubmit, getValues, onSubmit]);
+    return () => removeEventListener("keypress", handleEnterPress);
+  }, [handleSubmit, getValues, onSubmit, isInputFocused]);
 
   return (
     <div className="container mx-auto p-5 bg-search-background bg-cover bg-center bg-no-repeat lg:py-28">
@@ -57,12 +62,16 @@ const TripSearch = () => {
       <div className="flex flex-col justify-center items-center gap-3 lg:flex-row lg:max-w-[948px] lg:mx-auto lg:px-6 lg:py-6 lg:min-h-max lg:bg-primary lg:bg-opacity-25 lg:rounded-lg">
         <Input
           placeholder="Onde você quer ir?"
+          aria-label="Onde você quer ir?"
           error={!!errors.text}
           errorMessage={errors.text?.message}
           {...register("text", {
             required: "Por favor, informe onde deseja ir."
           })}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
         />
+
         <div className="flex gap-2 w-full lg:h-[58px]">
           <Controller
             name="startDate"
@@ -86,6 +95,7 @@ const TripSearch = () => {
               <CurrencyInput
                 allowDecimals={false}
                 placeholder="Orçamento"
+                aria-label="Orçamento"
                 onValueChange={field.onChange}
                 value={field.value}
                 onBlur={field.onBlur}
@@ -93,9 +103,11 @@ const TripSearch = () => {
             )}
           />
         </div>
+
         <Button
           onClick={handleSubmit(onSubmit)}
           className="shadow-md transition ease-linear duration-150 lg:w-1/2 lg:self-start"
+          aria-label="Buscar viagem"
         >
           Buscar
         </Button>
