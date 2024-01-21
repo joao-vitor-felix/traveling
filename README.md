@@ -29,8 +29,6 @@ Para rodar esse projeto localmente, é necessário adicionar as seguintes variá
 DATABASE_URL = URL do seu banco de dados
 ```
 
-É possível povoar o banco utilizando o `updateTripSeed` script em `src/app/lib`
-
 ```
 HOST_URL = URL do ambiente (development ou production)
 ```
@@ -89,6 +87,12 @@ Instale as dependências
   npm install
 ```
 
+É possível povoar o banco utilizando o `seed.ts` script em `src/app/lib`, para isso rode o comando
+
+```
+npx prisma db seed
+```
+
 Inicie o servidor
 
 ```bash
@@ -105,7 +109,7 @@ Para rodar os testes, rode o seguinte comando:
 
 ## ⌛ Deployment
 
-Este repostório utiliza continuous deployment com a Vercel. Ou seja, toda vez que um commit é feito, o build para produção é feito automaticamente.
+Este repositório utiliza continuous deployment com a Vercel. Ou seja, toda vez que um commit é feito, o build para produção é feito automaticamente.
 
 ## 🚀 Feedback
 
