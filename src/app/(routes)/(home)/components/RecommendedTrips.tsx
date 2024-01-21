@@ -2,19 +2,8 @@ import TripItem from "@/components/TripItem/TripItem";
 import { prisma } from "@/lib/prisma";
 import { Trip } from "@prisma/client";
 
-const fetchTrips = async () => {
-  try {
-    const trips = await prisma.trip.findMany({});
-    return trips;
-  } catch (error) {
-    console.error(error);
-  } finally {
-    await prisma.$disconnect();
-  }
-};
-
 const RecommendedTrips = async () => {
-  const data = await fetchTrips();
+  const trips = await prisma.trip.findMany();
 
   return (
     <section className="container mx-auto p-5">
@@ -27,8 +16,8 @@ const RecommendedTrips = async () => {
       </div>
 
       <div className="flex flex-col items-center mt-5 gap-5 lg:grid lg:grid-cols-3 lg:place-items-center lg:gap-y-10 lg:mt-10">
-        {data &&
-          data.map((trip: Trip) => <TripItem key={trip.id} trip={trip} />)}
+        {trips &&
+          trips.map((trip: Trip) => <TripItem key={trip.id} trip={trip} />)}
       </div>
     </section>
   );
