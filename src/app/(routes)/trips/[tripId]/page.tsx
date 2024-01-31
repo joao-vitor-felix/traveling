@@ -7,18 +7,17 @@ import TripLocation from "./components/TripLocation";
 import { FC } from "react";
 
 const getTripDetails = async (tripId: string) => {
-  let trip;
   try {
-    trip = await prisma.trip.findUnique({
+    const trip = await prisma.trip.findUnique({
       where: {
         id: tripId
       }
     });
-  } finally {
-    await prisma.$disconnect();
-  }
 
-  return trip;
+    return trip;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export async function generateMetadata({
