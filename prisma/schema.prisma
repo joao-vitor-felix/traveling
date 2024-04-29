@@ -35,9 +35,9 @@ model Trip {
 model TripReservation {
   id        String   @id @default(uuid())
   tripId    String
-  trip      Trip     @relation(fields: [tripId], references: [id])
+  trip      Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id],, onDelete: Cascade)
   startDate DateTime
   endDate   DateTime
   totalPaid Decimal  @db.Decimal(8, 2)
